@@ -7,6 +7,8 @@ Resources:
     Properties:
       Handler: myDateTimeFunction.handler
       Runtime: nodejs18.x
+      Timeout: 60
+      MemorySize: 128
       AutoPublishAlias: live
       Policies:
       - Version: '2012-10-17'
@@ -17,73 +19,6 @@ Resources:
           Resource: '*'
       DeploymentPreference:
         Type: Linear10PercentEvery1Minute
-        Hooks:
-          PreTraffic:
-            Ref: beforeAllowTraffic
-          PostTraffic:
-            Ref: afterAllowTraffic
-      CodeUri: s3://peech-demo-bucket-1/7b82dfecbbbc897c3d890b5f17bf9a55
+      CodeUri: s3://peech-demo-bucket-1/efb7a9d5d36b6f07a9db4ebbaf77f49f
     Metadata:
       SamResourceId: myDateTimeFunction
-  beforeAllowTraffic:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: beforeAllowTraffic.handler
-      Policies:
-      - Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Action:
-          - codedeploy:PutLifecycleEventHookExecutionStatus
-          Resource:
-            Fn::Sub: arn:aws:codedeploy:${AWS::Region}:${AWS::AccountId}:deploymentgroup:${ServerlessDeploymentApplication}/*
-      - Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Action:
-          - lambda:InvokeFunction
-          Resource:
-            Ref: myDateTimeFunction.Version
-      Runtime: nodejs18.x
-      FunctionName: CodeDeployHook_beforeAllowTraffic
-      DeploymentPreference:
-        Enabled: false
-      Timeout: 5
-      Environment:
-        Variables:
-          NewVersion:
-            Ref: myDateTimeFunction.Version
-      CodeUri: s3://peech-demo-bucket-1/7b82dfecbbbc897c3d890b5f17bf9a55
-    Metadata:
-      SamResourceId: beforeAllowTraffic
-  afterAllowTraffic:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: afterAllowTraffic.handler
-      Policies:
-      - Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Action:
-          - codedeploy:PutLifecycleEventHookExecutionStatus
-          Resource:
-            Fn::Sub: arn:aws:codedeploy:${AWS::Region}:${AWS::AccountId}:deploymentgroup:${ServerlessDeploymentApplication}/*
-      - Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Action:
-          - lambda:InvokeFunction
-          Resource:
-            Ref: myDateTimeFunction.Version
-      Runtime: nodejs18.x
-      FunctionName: CodeDeployHook_afterAllowTraffic
-      DeploymentPreference:
-        Enabled: false
-      Timeout: 5
-      Environment:
-        Variables:
-          NewVersion:
-            Ref: myDateTimeFunction.Version
-      CodeUri: s3://peech-demo-bucket-1/7b82dfecbbbc897c3d890b5f17bf9a55
-    Metadata:
-      SamResourceId: afterAllowTraffic

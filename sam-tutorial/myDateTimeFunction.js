@@ -1,16 +1,12 @@
 "use strict";
 
-const { someLogFunc } = require("./common");
-
-export function handler(event, context, callback) {
+exports.handler = function (event, context, callback) {
   if (event.body) {
     event = JSON.parse(event.body);
   }
 
   var sc; // Status code
   var result = ""; // Response payload
-
-  someLogFunc();
 
   switch (event.option) {
     case "date":
@@ -99,4 +95,4 @@ export function handler(event, context, callback) {
 
     return result;
   }
-}
+};
