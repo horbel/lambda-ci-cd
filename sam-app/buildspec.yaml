@@ -1,12 +1,13 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - cd ./sam-app
-      - npm i
+  # install:
+  #   commands:
+  #     - cd ./sam-app
+  #     - npm i
   build:
     commands:
+      - cd ./sam-app
       - sam build
       - sam deploy
 
