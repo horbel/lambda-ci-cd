@@ -20,4 +20,4 @@ Resources:
                 - "lambda:InvokeFunction"
               Resource: '*'
       DeploymentPreference:
-        Type: Linear10PercentEvery1Minute
+        Type: AllAtOnce
