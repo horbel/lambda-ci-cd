@@ -5,6 +5,7 @@ phases:
         nodejs: 18
   build:
     commands:
+      - cd ./sam-tutorial
       - sam package --template-file template.yml --s3-bucket peech-demo-bucket-1 --output-template-file packaged-template.yml
 artifacts:
   files:
