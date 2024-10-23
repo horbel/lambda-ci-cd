@@ -19,6 +19,6 @@ Resources:
           Resource: '*'
       DeploymentPreference:
         Type: AllAtOnce
-      CodeUri: s3://peech-demo-bucket-1/6a3caba3ca0a8d8243b9e3aa94e3dd3f
+      CodeUri: s3://peech-demo-bucket-1/6871a7017b8f943d684f9b1b56ea8353
     Metadata:
       SamResourceId: myDateTimeFunction
