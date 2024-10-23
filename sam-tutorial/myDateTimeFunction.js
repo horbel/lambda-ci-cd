@@ -1,5 +1,6 @@
 "use strict";
-import { someLogFunc } from "./common";
+
+const { someLogFunc } = require("./common");
 
 export function handler(event, context, callback) {
   if (event.body) {

@@ -1,3 +1,5 @@
-export function someLogFunc() {
-  console.log(`Juts log a string`);
+function someLogFunc() {
+  console.log(`Just log a string`);
 }
+
+module.exports = { someLogFunc };
