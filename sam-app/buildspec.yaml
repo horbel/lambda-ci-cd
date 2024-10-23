@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm i
+  build:
+    commands:
+      - sam build
+      - sam deploy
+
+artifacts:
+  files:
+    - packaged.yaml
